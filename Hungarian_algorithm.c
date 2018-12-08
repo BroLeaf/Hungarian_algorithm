@@ -365,8 +365,10 @@ void Hungarian (unit **ori, unit **job, int row, int col)
         // break;
         // find lowest value and set col_record
     }
+    printf("\nMaximum matching:\n");
+    display2(Maximum_matching, row, col);
     unit sum = get_Maximum_weight(ori, Maximum_matching, row, col);
-    printf("sum of Maximum matching is %lld.", sum);
+    printf("\nSum of Maximum matching is %lld.", sum);
 }
 
 int main()
@@ -387,6 +389,7 @@ int main()
         job_Matrix[i] = (unit *)malloc(col * sizeof(unit));
     }
     get_Matrix_entry(orig_Matrix, job_Matrix, row, col);
+    printf("Input:\n");
     display(job_Matrix, row, col);
     // printf("\n");
     Hungarian(orig_Matrix, job_Matrix, row, col);
