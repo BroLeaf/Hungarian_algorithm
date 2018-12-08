@@ -16,6 +16,14 @@ void display (unit **A, int row, int col)
             printf("%lld ", A[i][j]);
 }
 
+void display2 (int **A, int row, int col)
+{
+    int i, j;
+    for (i = 0; i < row; i++, printf("\n"))
+        for (j = 0; j < col; j++)
+            printf("%d ", A[i][j]);
+}
+
 void get_Matrix_entry (unit **A, unit **B, int row, int col)
 {
     int i, j;
@@ -358,7 +366,7 @@ void Hungarian (unit **ori, unit **job, int row, int col)
         // find lowest value and set col_record
     }
     unit sum = get_Maximum_weight(ori, Maximum_matching, row, col);
-    printf("%lld", sum);
+    printf("sum of Maximum matching is %lld.", sum);
 }
 
 int main()
