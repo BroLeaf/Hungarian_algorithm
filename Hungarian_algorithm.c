@@ -45,21 +45,19 @@ void find_Row_Maximum (unit **ori, unit *row_record, int row, int col)
 /* Find minimum vertex cover and return true, when 
  * find out that every row has a unique vertex.
  */
-int Hungarian_isDone (int **Maximum_matching, int row, int col)
+int Hungarian_isDone (unit **ori, int *min_cover_row, int *min_cover_col, int row, int col)
 {
     int i, j, count = 0;
     for(i = 0; i < row; i++)
     {
         for(j = 0; j < col; j ++)
         {
-            if(Maximum_matching[i][j])
-                count++;
+            if(ori[i][j])
+                if(!min_cover_row[i] && !min_cover_col[j])
+                    return false;
         }
     }
-    if(count == row)
-        return true;
-    else
-        return false;
+    return true;
 }
 
 void Set_zero_edge (unit **job, int **edge, int row, int col)
@@ -317,7 +315,7 @@ void Hungarian (unit **ori, unit **job, int row, int col)
         S[i] = 0;
     }
 
-    while (!Hungarian_isDone(Maximum_matching, row, col))
+    while (!Hungarian_isDone(ori, min_cover_row, min_cover_col, row, col))
     {
         /* reset value for every iteration */
         for(i = 0; i < row; i++)
@@ -381,7 +379,7 @@ int main()
         job_Matrix[i] = (unit *)malloc(col * sizeof(unit));
     }
     get_Matrix_entry(orig_Matrix, job_Matrix, row, col);
-    // display(job_Matrix, row, col);
+    display(job_Matrix, row, col);
     // printf("\n");
     Hungarian(orig_Matrix, job_Matrix, row, col);
     
